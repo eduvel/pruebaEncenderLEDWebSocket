@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Controlar LED con WebSocket</title>
+</head>
+<body>
+  <h1>Controlar LED con WebSocket</h1>
+  <button onclick="sendMessage('ON')">Encender LED</button>
+  <button onclick="sendMessage('OFF')">Apagar LED</button>
+  <script>
+    var webSocket = new WebSocket('ws://' + window.location.hostname + ':81/');
+    webSocket.onmessage = function(event) {
+      console.log('Mensaje del servidor: ' + event.data);
+    };
+    function sendMessage(message) {
+      webSocket.send(message);
+    }
+  </script>
+</body>
+</html>
